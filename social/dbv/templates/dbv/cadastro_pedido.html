@@ -1,0 +1,156 @@
+<body>
+
+<head>
+  <style>
+  .linha{
+          display:grid;
+          grid-template-columns: 90% 10%;
+          width: 100%;
+  }
+  .box1{
+  background-color: lightgray;
+  font-size: 40px;
+  font-weight: bold;
+  }
+
+  .box2{
+  background-color: lightblue;
+  font-size: 35px;
+  }
+
+  .box3{
+  font-size: 70px !important;
+  border: 1px solid #333;
+  }
+
+  .box4{
+  font-size: 30px;
+  }
+
+  .box5{
+    font-size: 65px;
+  }
+
+  </style>
+
+  <script>
+  function funcao1(){
+                      var x = 1;
+                      var soma = 0;
+                      while (document.querySelector("#choice"+x)) {
+                        var preco = document.querySelector("#choice"+x);
+                        preco = preco.value.replace(',','.');
+                        var select = document.getElementById("select"+x);
+                        var qtd = select.options[select.selectedIndex].value;
+                        preco = parseFloat(preco);
+                        qtd = parseFloat(qtd);
+                        soma += preco * qtd;
+                        x++;
+                      }
+                      soma = "O valor total da compra é R$ " + soma;
+                      confirm(soma.replace('.',','));
+
+                      var teste = document.getElementById('teste');
+                      alert(teste.value);
+                    }
+
+  </script>
+</head>
+
+<form>
+    {% csrf_token %}
+
+  <fieldset>
+      <legend class="box5">Pedidos</legend>
+      {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+      {% for choice in lista.0 %}
+          <input type="hidden" name="choice{{ forloop.counter }}" id="choice{{ forloop.counter }}" value="{{ choice.valor }}"></input>
+          <div class="linha">
+            <div>
+            <div class="box1">{{choice.descricao}}</div>
+            <div class="box2">R$ {{choice.valor}}</div>
+            </div>
+            <div>
+            <select class="box3" name="select{{forloop.counter}}" id="select{{forloop.counter}}">
+                <option value="0" selected>0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+              </select>
+              </div>
+          </div>
+          <br>
+      {% endfor %}
+      <br>
+  </fieldset>
+
+
+<!--    <fieldset>
+        <legend><h1>x</h1></legend>
+        {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+        {% for choice in lista.0 %}
+            <input type="checkbox" name="choice{{ forloop.counter }}" id="choice{{ forloop.counter }}" value="{{ choice.valor }}">
+            <label for="choice{{ forloop.counter }}" >{{choice.descricao}}  {{ choice.valor }}</label>
+            <select name="select{{forloop.counter}}" id="select{{forloop.counter}}">
+                <option value="0" selected>0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+            </select>
+            <br>
+        {% endfor %}
+        <br>
+    </fieldset>
+-->
+
+<!--
+    <fieldset>
+        <legend><h1>z</h1></legend>
+        {% for variavel in lista.1 %}
+            <input type="checkbox" name="choice{{ forloop.counter }}" id="choice{{ forloop.counter }}" value="{{ variavel.descricao }}">
+            <label for="choice{{ forloop.counter }}">{{ variavel.descricao }}  {{variavel.valor}}</label>
+            <select name="select{{forloop.counter}}">
+                <option value="0" selected>0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+            </select>
+            <br>
+        {% endfor %}
+        <br>
+    </fieldset>
+-->
+<br>
+</form>
+
+<center><input class="box4" type="button" onclick="funcao1()" value="Calcular" /></center>
+
+
+</body>

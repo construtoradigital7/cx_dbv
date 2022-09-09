@@ -1,0 +1,28 @@
+{% extends 'caixa/base.html' %}
+
+{% block content %}
+ {% for post in posts %}
+      <fieldset>
+      <legend><h1>{{ post.id }}</h1></legend>
+        <table>
+          <tr>
+            <td>
+              <div>
+              <h3>{{post.item1}}</<h3>
+              <h3>{{post.item2}}</<h3>
+              </div>
+            </td>
+            <td>
+              <div>
+              <h3>{{post.qtd_item1}}</<h3>
+              <h3>{{post.qtd_item2}}</<h3>
+              </div>
+            </td>
+            <td>
+              <button>ok</button>
+            </td>
+          </tr>
+        </table>
+    </fieldset>
+  {% endfor %}
+{%endblock%}
